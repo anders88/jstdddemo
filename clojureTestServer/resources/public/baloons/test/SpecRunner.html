@@ -19,60 +19,44 @@
   <!-- include spec files here... -->
   <script type="text/javascript" src="lib/angular-mocks.js"></script>
   <script type="text/javascript" src="spec/baloonCtrlSpec.js"></script>
+  <script type="text/javascript" src="spec/baloonTemplateSpec.js"></script>
 
-  <script type="text/javascript">
-      var jasmineEnv;
-        (function() {
-      jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
-
-      var htmlReporter = new jasmine.HtmlReporter();
-
-      jasmineEnv.addReporter(htmlReporter);
-
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
-
-      var currentWindowOnload = window.onload;
-
-      window.onload = function() {
-        if (currentWindowOnload) {
-          currentWindowOnload();
-        }
-
-        var templateWrapper = jQuery('#templates');
-        jQuery.get("../src/buyBaloons.html", function(response) {
-
-          templateWrapper.append(jQuery('<div>').attr('id', "buyBaloons").append(response));
-        });
-        jQuery(document).ajaxStop(function() {
-           jasmineEnv.execute();
-        });
-       
-      };
-
-      function execJasmine() {
-        jasmineEnv.execute();
-      }
-
-
-
-    })();
-
-  </script>
-
-
-  <script type="text/javascript">
-        
-  
-    
-  </script>
-
+ 
 </head>
 
 <body>
-      <div id="#templates"></div>
+     <script type="text/javascript">
+      //Don't do live updates when running through HTMLUnit
+      if (typeof Packages !== "undefined") {
+        jasmine.getEnv().updateInterval = Number.MAX_VALUE;
+      }
+
+      var executeJasmineSpecs = function() {
+          var jasmineEnv = jasmine.getEnv();
+          jasmineEnv.updateInterval = 1000;
+
+         var htmlReporter = new jasmine.HtmlReporter();
+
+        jasmineEnv.addReporter(htmlReporter);
+
+        jasmineEnv.specFilter = function(spec) {
+          return htmlReporter.specFilter(spec);
+        };
+        jasmineEnv.execute();
+
+      };
+    </script>
+    <div id="templates" style="display:none;"></div>
+    <script type="text/javascript">
+      var templateWrapper = jQuery('#templates');
+      jQuery.get("../src/baloonFormTemplate.html", function(response) {
+
+          templateWrapper.append(jQuery('<div>').attr('id', "buyBaloons").append(response));
+        });
+      jQuery(document).ajaxStop(function() {
+        executeJasmineSpecs();
+      });
+    </script>
 
 </body>
 </html>

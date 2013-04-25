@@ -1,0 +1,8 @@
+<div ng-controller="BaloonCtrl">
+	<h1>Le Baloons</h1>
+	<form class="well span12">
+		Number <input type="number" ng-model="number"/>&nbsp;
+		Cost per unit <input type="number" ng-model="unitPrice"/>&nbsp;&nbsp;
+		<span class="lead" id="totalLabel">Total: {{total()}}</span>
+	</form>
+</div>    

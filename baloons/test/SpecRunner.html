@@ -20,6 +20,7 @@
   <script type="text/javascript" src="lib/angular-mocks.js"></script>
   <script type="text/javascript" src="spec/baloonCtrlSpec.js"></script>
 
+
   <script type="text/javascript">
     (function() {
       var jasmineEnv = jasmine.getEnv();
@@ -39,15 +40,11 @@
         if (currentWindowOnload) {
           currentWindowOnload();
         }
-        //execJasmine();
         var templateWrapper = jQuery('#templates');
         jQuery.get("../src/buyBaloons.html", function(response) {
           templateWrapper.append(jQuery('<div>').attr('id', "buyBaloons").append(response));
           execJasmine();
         });
-        // jQuery(document).ajaxStop(function() {
-        //   execJasmine();
-        // });
       };
 
       function execJasmine() {

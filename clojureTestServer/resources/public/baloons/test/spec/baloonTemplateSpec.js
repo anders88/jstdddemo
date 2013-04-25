@@ -1,4 +1,4 @@
-describe('Baloon Ctrl', function() {
+describe('Baloon Template', function() {
      var controller;
      var scope;
 
@@ -19,20 +19,19 @@ describe('Baloon Ctrl', function() {
           var element = angular.element(this.template);
           $compile(element.contents())(scope);
            this.wrapper.append(element);  
-           //console.log(this.wrapper);
+           scope.$digest();
     }));
 
-    it('should add up', function() {
-        scope.unitPrice = 2;
-        scope.number = 4;
+     // afterEach(function() {
+     //    this.wrapper.remove();
+     // }); 
 
-        expect(scope.total()).toEqual(8);
-    });
 
     it('should display price', function() {
-        //console.log(this.wrapper.find("#totalLabel").html());
         scope.unitPrice = 2;
         scope.number = 4;
+        scope.$digest();
 
+        expect(this.wrapper.find("#totalLabel").html()).toEqual("Total: 8");
     });
 });
