@@ -11,7 +11,6 @@ describe('Baloon Template', function() {
          });
 
          this.template = $('#buyBaloons').html();
-         console.log(this.template);
          
          this.wrapper = $('<div>');
          $('body').append(this.wrapper);
@@ -22,9 +21,9 @@ describe('Baloon Template', function() {
            scope.$digest();
     }));
 
-     // afterEach(function() {
-     //    this.wrapper.remove();
-     // }); 
+      afterEach(function() {
+         this.wrapper.remove();
+      }); 
 
 
     it('should display price', function() {
