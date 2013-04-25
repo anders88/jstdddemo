@@ -21,8 +21,9 @@
   <script type="text/javascript" src="spec/baloonCtrlSpec.js"></script>
 
   <script type="text/javascript">
-    (function() {
-      var jasmineEnv = jasmine.getEnv();
+      var jasmineEnv;
+        (function() {
+      jasmineEnv = jasmine.getEnv();
       jasmineEnv.updateInterval = 1000;
 
       var htmlReporter = new jasmine.HtmlReporter();
@@ -39,26 +40,39 @@
         if (currentWindowOnload) {
           currentWindowOnload();
         }
-        //execJasmine();
+
         var templateWrapper = jQuery('#templates');
         jQuery.get("../src/buyBaloons.html", function(response) {
+
           templateWrapper.append(jQuery('<div>').attr('id', "buyBaloons").append(response));
-          execJasmine();
         });
-        // jQuery(document).ajaxStop(function() {
-        //   execJasmine();
-        // });
+        jQuery(document).ajaxStop(function() {
+           jasmineEnv.execute();
+        });
+       
       };
 
       function execJasmine() {
         jasmineEnv.execute();
       }
 
+
+
     })();
+
+  </script>
+
+
+  <script type="text/javascript">
+        
+  
+    
   </script>
 
 </head>
 
 <body>
+      <div id="#templates"></div>
+
 </body>
 </html>
