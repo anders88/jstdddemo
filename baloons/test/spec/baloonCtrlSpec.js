@@ -1,6 +1,21 @@
 describe('Baloon Ctrl', function() {
-     
-    it('should', function() {
-        expect("1").toEqual("1");
+     var controller;
+     var scope;
+
+
+     beforeEach(inject(function($controller, $rootScope) {
+         scope = $rootScope;
+
+         controller = $controller('BaloonCtrl', {
+             $scope : scope,
+         });
+
+    }));
+
+    it('should add up', function() {
+        scope.unitPrice = 2;
+        scope.number = 4;
+
+        expect(scope.total()).toEqual(8);
     });
 });
